@@ -19,6 +19,7 @@ export default class App extends React.Component {
   state = {
     newToDo: ""
   };
+
   render() {
     const { newToDo } = this.state;
     return (
@@ -29,9 +30,10 @@ export default class App extends React.Component {
           <TextInput
             style={styles.input}
             placeholder={"New To Do"}
+            placeholderTextColor={"#999"}
             value={newToDo}
             onChangeText={this._controlNewToDo}
-            placeholderTextColor={"#999"}
+
             //ios 키보드에서 엔터키를 done 키로 바꿈
             //returnKeyType={"done"}
             //ios 키보드에서 자동수정을 끔
@@ -48,6 +50,7 @@ export default class App extends React.Component {
       </View>
     );
   }
+
   _controlNewToDo = text => {
     this.setState({
       newToDo: text
@@ -74,6 +77,7 @@ const styles = StyleSheet.create({
     width: width - 25,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    // 다음과 같이 platform 을 이용하여 ios, android 를 혼용할 수 있음
     ...Platform.select({
       ios: {
         shadowColor: "rgb(50, 50, 50)",
