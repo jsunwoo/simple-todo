@@ -12,17 +12,36 @@ import { TextInput } from "./node_modules/react-native-gesture-handler";
 const { height, width } = Dimensions.get("window");
 
 export default class App extends React.Component {
+  state = {
+    newToDo: ""
+  };
   render() {
+    const { newToDo } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
         <Text style={styles.title}>Simple to do</Text>
         <View style={styles.card}>
-          <TextInput style={styles.input} placeholder={"New To Do"} />
+          <TextInput
+            style={styles.input}
+            placeholder={"New To Do"}
+            value={newToDo}
+            onChangeText={this._controlNewTodo}
+            placeholderTextColor={"#999"}
+            //ios 키보드에서 엔터키를 done 키로 바꿈
+            //returnKeyType={"done"}
+            //ios 키보드에서 자동수정을 끔
+            //autoCorrect={false}
+          />
         </View>
       </View>
     );
   }
+  _controlNewTodo = text => {
+    this.setState({
+      newToDo: text
+    });
+  };
 }
 
 const styles = StyleSheet.create({
@@ -59,5 +78,10 @@ const styles = StyleSheet.create({
       }
     })
   },
-  input: {}
+  input: {
+    padding: 15,
+    borderBottomColor: "#bbb",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    fontSize: 20
+  }
 });
