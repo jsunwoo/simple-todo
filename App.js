@@ -7,7 +7,8 @@ import {
   Dimensions,
   Platform
 } from "react-native";
-import { TextInput } from "./node_modules/react-native-gesture-handler";
+import { TextInput, ScrollView } from "./node_modules/react-native-gesture-handler";
+import ToDo from "./ToDo";
 
 const { height, width } = Dimensions.get("window");
 
@@ -26,18 +27,21 @@ export default class App extends React.Component {
             style={styles.input}
             placeholder={"New To Do"}
             value={newToDo}
-            onChangeText={this._controlNewTodo}
+            onChangeText={this._controlNewToDo}
             placeholderTextColor={"#999"}
             //ios 키보드에서 엔터키를 done 키로 바꿈
             //returnKeyType={"done"}
             //ios 키보드에서 자동수정을 끔
             //autoCorrect={false}
           />
+          <ScrollView>
+            <ToDo/>
+          </ScrollView>
         </View>
       </View>
     );
   }
-  _controlNewTodo = text => {
+  _controlNewToDo = text => {
     this.setState({
       newToDo: text
     });
