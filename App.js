@@ -7,7 +7,10 @@ import {
   Dimensions,
   Platform
 } from "react-native";
-import { TextInput, ScrollView } from "./node_modules/react-native-gesture-handler";
+import {
+  TextInput,
+  ScrollView
+} from "./node_modules/react-native-gesture-handler";
 import ToDo from "./ToDo";
 
 const { height, width } = Dimensions.get("window");
@@ -34,8 +37,12 @@ export default class App extends React.Component {
             //ios 키보드에서 자동수정을 끔
             //autoCorrect={false}
           />
-          <ScrollView>
-            <ToDo/>
+          <ScrollView
+            contentContainerStyle={styles.toDos}
+            // contentContainerStyle 은 ScrollView 안에 스타일을 적용하는 방법
+            // 그냥 style 로 하니까 안됨
+          >
+            <ToDo />
           </ScrollView>
         </View>
       </View>
@@ -87,5 +94,8 @@ const styles = StyleSheet.create({
     borderBottomColor: "#bbb",
     borderBottomWidth: StyleSheet.hairlineWidth,
     fontSize: 20
+  },
+  toDos: {
+    alignItems: "center"
   }
 });
