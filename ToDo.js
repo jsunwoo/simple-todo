@@ -16,29 +16,54 @@ export default class ToDo extends Component {
   };
 
   render() {
-    const { isCompleted } = this.state;
+    const { isCompleted, isEditing } = this.state;
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this._toggleComplete}>
-          <View
+        <View style={styles.column}>
+          <TouchableOpacity onPress={this._toggleComplete}>
+            <View
+              style={[
+                styles.circle,
+                isCompleted ? styles.completedCircle : styles.uncompletedCircle
+              ]}
+            />
+          </TouchableOpacity>
+          <Text
             style={[
-              styles.circle,
-              isCompleted ? styles.completedCircle : styles.uncompletedCircle
+              styles.text,
+              isCompleted ? styles.completedText : styles.uncompletedText
             ]}
-          />
-        </TouchableOpacity>
-        <Text
-          style={[
-            styles.text,
-            isCompleted ? styles.completedText : styles.uncompletedText
-          ]}
-        >
-          Hello I'm a To Do
-        </Text>
+          >
+            Hello I'm a To Do
+          </Text>
+        </View>
+        <View style={styles.column}>
+          {isEditing ? (
+            <View style={styles.actions}>
+              <TouchableOpacity>
+                <View style={styles.actionContainer}>
+                  <Text style={styles.actionText}>v</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.actions}>
+              <TouchableOpacity>
+                <View style={styles.actionContainer}>
+                  <Text style={styles.actionText}>e</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <View style={styles.actionContainer}>
+                  <Text style={styles.actionText}>x</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
       </View>
     );
   }
-
   _toggleComplete = () => {
     this.setState(prevState => {
       return {
@@ -47,7 +72,6 @@ export default class ToDo extends Component {
     });
   };
 }
-
 const styles = StyleSheet.create({
   container: {
     width: width - 50,
@@ -70,16 +94,16 @@ const styles = StyleSheet.create({
   uncompletedCircle: {
     borderColor: "#F23657"
   },
+  text: {
+    fontWeight: "200",
+    fontSize: 18,
+    marginVertical: 15
+  },
   completedText: {
     color: "#bbb",
     textDecorationLine: "line-through"
   },
   uncompletedText: {
     color: "#353839"
-  },
-  text: {
-    fontWeight: "200",
-    fontSize: 18,
-    marginVertical: 15
   }
 });
