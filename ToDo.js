@@ -37,30 +37,28 @@ export default class ToDo extends Component {
             Hello I'm a To Do
           </Text>
         </View>
-        <View style={styles.column}>
-          {isEditing ? (
-            <View style={styles.actions}>
-              <TouchableOpacity>
-                <View style={styles.actionContainer}>
-                  <Text style={styles.actionText}>v</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <View style={styles.actions}>
-              <TouchableOpacity>
-                <View style={styles.actionContainer}>
-                  <Text style={styles.actionText}>e</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <View style={styles.actionContainer}>
-                  <Text style={styles.actionText}>x</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
+        {isEditing ? (
+          <View style={styles.actions}>
+            <TouchableOpacity>
+              <View style={styles.actionContainer}>
+                <Text style={styles.actionText}>v</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.actions}>
+            <TouchableOpacity>
+              <View style={styles.actionContainer}>
+                <Text style={styles.actionText}>e</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={styles.actionContainer}>
+                <Text style={styles.actionText}>x</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     );
   }
@@ -78,15 +76,16 @@ const styles = StyleSheet.create({
     borderBottomColor: "#bbb",
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "space-between"
   },
   circle: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     // borderRadius 는 크기는 항상 반지름
-    borderRadius: 15,
-    borderWidth: 3,
-    marginRight: 15
+    borderRadius: 12,
+    borderWidth: 4,
+    marginRight: 12
   },
   completedCircle: {
     borderColor: "#bbb"
@@ -111,5 +110,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: width / 2,
     justifyContent: "space-between"
+  },
+  actions: {
+    flexDirection: "row"
+  },
+  actionContainer: {
+    marginLeft: 15,
+    marginRight: 15
+  },
+  actionText: {
+    fontSize: 20
   }
 });
