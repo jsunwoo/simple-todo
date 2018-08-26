@@ -32,7 +32,15 @@ export default class ToDo extends Component {
             />
           </TouchableOpacity>
           {isEditing ? (
-            <TextInput value={toDoValue} />
+            <TextInput
+              style={[
+                styles.input,
+                styles.text,
+                isCompleted ? styles.completedText : styles.uncompletedText
+              ]}
+              value={toDoValue}
+              multiline={true}
+            />
           ) : (
             <Text
               style={[
@@ -132,9 +140,14 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   actionContainer: {
-    marginLeft: 10
+    marginVertical: 10,
+    marginHorizontal: 10
   },
   actionText: {
-    fontSize: 20
+    fontSize: 20,
+  },
+  input: {
+    marginVertical: 10,
+    width: width / 2
   }
 });
