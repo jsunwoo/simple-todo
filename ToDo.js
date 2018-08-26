@@ -47,7 +47,7 @@ export default class ToDo extends Component {
           </View>
         ) : (
           <View style={styles.actions}>
-            <TouchableOpacity>
+            <TouchableOpacity onPressOut={this._startEditing}>
               <View style={styles.actionContainer}>
                 <Text style={styles.actionText}>e</Text>
               </View>
@@ -67,6 +67,11 @@ export default class ToDo extends Component {
       return {
         isCompleted: !prevState.isCompleted
       };
+    });
+  };
+  _startEditing = () => {
+    this.setState({
+      isEditing: true
     });
   };
 }
