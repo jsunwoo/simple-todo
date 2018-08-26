@@ -41,10 +41,8 @@ export default class ToDo extends Component {
               value={toDoValue}
               multiline={true}
               onChangeText={this._controllInput}
-              // ios 만 가능한 기능같다
-              returnKeyType={"done"}
-              // 화면 밖을 터치하면 자동종료
-              onBlur={this._finishEditing}
+              returnKeyType={"done"}  // ios 전용 기능같음
+              onBlur={this._finishEditing}  // 화면밖 터치하면 실행
             />
           ) : (
             <Text
@@ -129,7 +127,8 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "200",
     fontSize: 18,
-    marginVertical: 15
+    marginVertical: 10,
+    width: width / 2
   },
   completedText: {
     color: "#bbb",
