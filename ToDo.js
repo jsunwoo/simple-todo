@@ -4,7 +4,8 @@ import {
   Text,
   View,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from "react-native";
 
 const { height, width } = Dimensions.get("window");
@@ -12,11 +13,12 @@ const { height, width } = Dimensions.get("window");
 export default class ToDo extends Component {
   state = {
     isEditing: false,
-    isCompleted: false
+    isCompleted: false,
+    toDoValue: ""
   };
 
   render() {
-    const { isCompleted, isEditing } = this.state;
+    const { isCompleted, isEditing, toDoValue } = this.state;
     const { text } = this.props;
     return (
       <View style={styles.container}>
@@ -29,14 +31,18 @@ export default class ToDo extends Component {
               ]}
             />
           </TouchableOpacity>
-          <Text
-            style={[
-              styles.text,
-              isCompleted ? styles.completedText : styles.uncompletedText
-            ]}
-          >
-            {text}
-          </Text>
+          {isEditing ? (
+            <TextInput value={toDoValue} />
+          ) : (
+            <Text
+              style={[
+                styles.text,
+                isCompleted ? styles.completedText : styles.uncompletedText
+              ]}
+            >
+              {text}
+            </Text>
+          )}
         </View>
         {isEditing ? (
           <View style={styles.actions}>
@@ -71,8 +77,10 @@ export default class ToDo extends Component {
     });
   };
   _startEditing = () => {
+    const { text } = this.props;
     this.setState({
-      isEditing: true
+      isEditing: true,
+      toDoValue: text
     });
   };
   _finishEditing = () => {
@@ -124,8 +132,7 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   actionContainer: {
-    marginLeft: 15,
-    marginRight: 15
+    marginLeft: 10
   },
   actionText: {
     fontSize: 20
