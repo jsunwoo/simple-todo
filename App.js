@@ -44,7 +44,7 @@ export default class App extends React.Component {
             // contentContainerStyle 은 ScrollView 안에 스타일을 적용하는 방법
             // 그냥 style 로 하니까 안됨
           >
-            <ToDo />
+            <ToDo text={"Hello"} />
           </ScrollView>
         </View>
       </View>
