@@ -39,7 +39,7 @@ export default class ToDo extends Component {
         </View>
         {isEditing ? (
           <View style={styles.actions}>
-            <TouchableOpacity>
+            <TouchableOpacity onPressOut={this._finishEditing}>
               <View style={styles.actionContainer}>
                 <Text style={styles.actionText}>v</Text>
               </View>
@@ -73,6 +73,9 @@ export default class ToDo extends Component {
     this.setState({
       isEditing: true
     });
+  };
+  _finishEditing = () => {
+    this.setState({ isEditing: false });
   };
 }
 const styles = StyleSheet.create({
