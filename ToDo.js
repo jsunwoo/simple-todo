@@ -105,5 +105,11 @@ const styles = StyleSheet.create({
   },
   uncompletedText: {
     color: "#353839"
+  },
+  column: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: width / 2,
+    justifyContent: "space-between"
   }
 });
