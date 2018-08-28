@@ -34,8 +34,8 @@ export default class ToDo extends Component {
           {isEditing ? (
             <TextInput
               style={[
-                styles.input,
                 styles.text,
+                styles.input,
                 isCompleted ? styles.completedText : styles.uncompletedText
               ]}
               value={toDoValue}
@@ -127,14 +127,14 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "200",
     fontSize: 18,
-    marginVertical: 10,
+    marginVertical: 15,
     width: width / 2
   },
   completedText: {
     color: "#bbb",
     textDecorationLine: "line-through"
   },
-  uncompletedText: {
+  uncompletedText: { 
     color: "#353839"
   },
   column: {

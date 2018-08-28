@@ -1,8 +1,8 @@
 import React from "react";
 import {
   StyleSheet,
-  Text,
   View,
+  Text,
   StatusBar,
   Dimensions,
   Platform
@@ -12,16 +12,26 @@ import {
   ScrollView
 } from "./node_modules/react-native-gesture-handler";
 import ToDo from "./ToDo";
+import { AppLoading } from "expo";
+import uuidv1 from "uuid/v1";
 
 const { height, width } = Dimensions.get("window");
 
 export default class App extends React.Component {
   state = {
-    newToDo: ""
+    newToDo: "",
+    loadedToDos: false
+  };
+
+  componentDidMount = () => {
+    this._loadToDos();
   };
 
   render() {
-    const { newToDo } = this.state;
+    const { newToDo, loadedToDos } = this.state;
+    if (!loadedToDos) {
+      return <AppLoading />;
+    }
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
@@ -30,14 +40,15 @@ export default class App extends React.Component {
           <TextInput
             style={styles.input}
             placeholder={"New To Do"}
-            placeholderTextColor={"#999"}
             value={newToDo}
             onChangeText={this._controlNewToDo}
-
+            placeholderTextColor={"#999"}
             //ios 키보드에서 엔터키를 done 키로 바꿈
             //returnKeyType={"done"}
             //ios 키보드에서 자동수정을 끔
             //autoCorrect={false}
+            //제출할때 실행되는 함수
+            onSubmitEditing={this._addToDo}
           />
           <ScrollView
             contentContainerStyle={styles.toDos}
@@ -55,6 +66,36 @@ export default class App extends React.Component {
     this.setState({
       newToDo: text
     });
+  };
+
+  _loadToDos = () => {
+    this.setState({ loadedToDos: true });
+  };
+
+  _addToDo = () => {
+    const { newToDo } = this.state;
+    if (newToDo !== "") {
+      this.setState(prevState => {
+        const ID = uuidv1();
+        const newToDoObject = {
+          [ID]: {
+            id: ID,
+            isCompleted: false,
+            text: newToDo,
+            createdAt: Date.now
+          }
+        };
+        const newState = {
+          ...prevState,
+          newToDo: "",
+          toDos: {
+            ...prevState.toDos,
+            ...newToDoObject
+          }
+        };
+        return { ...newState };
+      });
+    }
   };
 }
 
