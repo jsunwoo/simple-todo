@@ -20,7 +20,8 @@ const { height, width } = Dimensions.get("window");
 export default class App extends React.Component {
   state = {
     newToDo: "",
-    loadedToDos: false
+    loadedToDos: false,
+    toDos: {}
   };
 
   componentDidMount = () => {
@@ -28,7 +29,9 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { newToDo, loadedToDos } = this.state;
+    const { newToDo, loadedToDos, toDos } = this.state;
+    console.log(toDos);
+
     if (!loadedToDos) {
       return <AppLoading />;
     }
@@ -55,7 +58,9 @@ export default class App extends React.Component {
             // contentContainerStyle 은 ScrollView 안에 스타일을 적용하는 방법
             // 그냥 style 로 하니까 안됨
           >
-            <ToDo text={"Hello"} />
+            {Object.values(toDos).map(toDo => (
+              <ToDo key={toDo.id} {...toDo} />
+            ))}
           </ScrollView>
         </View>
       </View>
@@ -69,7 +74,9 @@ export default class App extends React.Component {
   };
 
   _loadToDos = () => {
-    this.setState({ loadedToDos: true });
+    this.setState({
+      loadedToDos: true
+    });
   };
 
   _addToDo = () => {
