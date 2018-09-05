@@ -7,14 +7,22 @@ import {
   TouchableOpacity,
   TextInput
 } from "react-native";
+import PropTypes from "prop-types";
 
 const { height, width } = Dimensions.get("window");
 
 export default class ToDo extends Component {
-  state = {
-    isEditing: false,
-    isCompleted: false,
-    toDoValue: ""
+  constructor(props) {
+    super(props);
+    this.state = {
+      isEditing: false,
+      toDoValue: props.text
+    };
+  }
+
+  static propTypes = {
+    text: PropTypes.string.isRequired,
+    isCompleted: PropTypes.bool.isRequired
   };
 
   render() {
@@ -41,8 +49,8 @@ export default class ToDo extends Component {
               value={toDoValue}
               multiline={true}
               onChangeText={this._controllInput}
-              returnKeyType={"done"}  // ios 전용 기능같음
-              onBlur={this._finishEditing}  // 화면밖 터치하면 실행
+              returnKeyType={"done"} // ios 전용 기능같음
+              onBlur={this._finishEditing} // 화면밖 터치하면 실행
             />
           ) : (
             <Text
@@ -88,11 +96,7 @@ export default class ToDo extends Component {
     });
   };
   _startEditing = () => {
-    const { text } = this.props;
-    this.setState({
-      isEditing: true,
-      toDoValue: text
-    });
+    this.setState({ isEditing: true });
   };
   _finishEditing = () => {
     this.setState({ isEditing: false });
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
     color: "#bbb",
     textDecorationLine: "line-through"
   },
-  uncompletedText: { 
+  uncompletedText: {
     color: "#353839"
   },
   column: {
