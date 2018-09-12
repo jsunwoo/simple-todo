@@ -24,7 +24,9 @@ export default class ToDo extends Component {
     text: PropTypes.string.isRequired,
     isCompleted: PropTypes.bool.isRequired,
     deleteToDo: PropTypes.func.isRequired,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    uncompleteToDo: PropTypes.func.isRequired,
+    completeToDo: PropTypes.func.isRequired
   };
 
   render() {
@@ -41,6 +43,7 @@ export default class ToDo extends Component {
               ]}
             />
           </TouchableOpacity>
+
           {isEditing ? (
             <TextInput
               style={[
@@ -65,6 +68,7 @@ export default class ToDo extends Component {
             </Text>
           )}
         </View>
+
         {isEditing ? (
           <View style={styles.actions}>
             <TouchableOpacity onPressOut={this._finishEditing}>
@@ -107,6 +111,7 @@ export default class ToDo extends Component {
     this.setState({ toDoValue: text });
   };
 }
+
 const styles = StyleSheet.create({
   container: {
     width: width - 50,

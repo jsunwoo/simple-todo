@@ -30,7 +30,9 @@ export default class App extends React.Component {
 
   render() {
     const { newToDo, loadedToDos, toDos } = this.state;
+    // 얘는 object 고
     console.log(toDos);
+    // 얘는 array 이다
     console.log(Object.values(toDos));
 
     if (!loadedToDos) {
@@ -61,7 +63,13 @@ export default class App extends React.Component {
           >
             <ToDo text="hello" />
             {Object.values(toDos).map(toDo => (
-              <ToDo key={toDo.id} {...toDo} deleteToDo={this._deleteToDo} />
+              <ToDo
+                key={toDo.id}
+                deleteToDo={this._deleteToDo}
+                uncompleteToDo={this._uncompleteToDo}
+                completeToDo={this._completeToDo}
+                {...toDo}
+              />
             ))}
           </ScrollView>
         </View>
@@ -114,6 +122,38 @@ export default class App extends React.Component {
       const newState = {
         ...prevState,
         ...toDos
+      };
+      return { ...newState };
+    });
+  };
+
+  _uncompleteToDo = id => {
+    this.setState(prevState => {
+      const newState = {
+        ...prevState,
+        toDos: {
+          ...prevState.toDos,
+          [id]: {
+            ...prevState.toDos[id],
+            isCompleted: false
+          }
+        }
+      };
+      return { ...newState };
+    });
+  };
+
+  _completeToDo = id => {
+    this.setState(prevState => {
+      const newState = {
+        ...prevState,
+        toDos: {
+          ...prevState.toDos,
+          [id]: {
+            ...prevState.toDos[id],
+            isCompleted: true
+          }
+        }
       };
       return { ...newState };
     });
