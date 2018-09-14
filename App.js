@@ -60,16 +60,18 @@ export default class App extends React.Component {
             // contentContainerStyle 은 ScrollView 안에 스타일을 적용하는 방법
             // 그냥 style 로 하니까 안됨
           >
-            {Object.values(toDos).map(toDo => (
-              <ToDo
-                key={toDo.id}
-                deleteToDo={this._deleteToDo}
-                uncompleteToDo={this._uncompleteToDo}
-                completeToDo={this._completeToDo}
-                updateToDo={this._updateToDo}
-                {...toDo}
-              />
-            ))}
+            {Object.values(toDos)
+              .reverse()
+              .map(toDo => (
+                <ToDo
+                  key={toDo.id}
+                  deleteToDo={this._deleteToDo}
+                  uncompleteToDo={this._uncompleteToDo}
+                  completeToDo={this._completeToDo}
+                  updateToDo={this._updateToDo}
+                  {...toDo}
+                />
+              ))}
           </ScrollView>
         </View>
       </View>
