@@ -5,7 +5,8 @@ import {
   Text,
   StatusBar,
   Dimensions,
-  Platform
+  Platform,
+  AsyncStorage
 } from "react-native";
 import {
   TextInput,
@@ -30,10 +31,8 @@ export default class App extends React.Component {
 
   render() {
     const { newToDo, loadedToDos, toDos } = this.state;
-    // 얘는 object 고
-    console.log(toDos);
-    // 얘는 array 이다
-    console.log(Object.values(toDos));
+    // 얘는 object console.log(toDos);
+    // 얘는 array console.log(Object.values(toDos));
 
     if (!loadedToDos) {
       return <AppLoading />;
@@ -110,6 +109,7 @@ export default class App extends React.Component {
             ...newToDoObject
           }
         };
+        this._saveToDos(newState.toDos);
         return { ...newState };
       });
     }
@@ -123,6 +123,7 @@ export default class App extends React.Component {
         ...prevState,
         ...toDos
       };
+      this._saveToDos(newState.toDos);
       return { ...newState };
     });
   };
@@ -139,6 +140,7 @@ export default class App extends React.Component {
           }
         }
       };
+      this._saveToDos(newState.toDos);
       return { ...newState };
     });
   };
@@ -155,6 +157,7 @@ export default class App extends React.Component {
           }
         }
       };
+      this._saveToDos(newState.toDos);
       return { ...newState };
     });
   };
@@ -171,8 +174,14 @@ export default class App extends React.Component {
           }
         }
       };
+      this._saveToDos(newState.toDos);
       return { ...newState };
     });
+  };
+
+  _saveToDos = newToDos => {
+    console.log(JSON.stringify(newToDos));
+    const saveToDos = AsyncStorage.setItem("toDos", JSON.stringify(newToDos));
   };
 }
 
