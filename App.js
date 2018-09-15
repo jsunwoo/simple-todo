@@ -40,7 +40,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
-        <Text style={styles.title}>Simple to do</Text>
+        <Text style={styles.title}>Life is a project</Text>
         <View style={styles.card}>
           <TextInput
             style={styles.input}
@@ -197,11 +197,11 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F23657",
+    backgroundColor: "#fffbe3",
     alignItems: "center"
   },
   title: {
-    color: "white",
+    color: "#6a425c",
     fontSize: 30,
     marginTop: 50,
     fontWeight: "100",
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "white",
     flex: 1,
-    width: width - 25,
+    width: width - 30,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     // 다음과 같이 platform 을 이용하여 ios, android 를 혼용할 수 있음
