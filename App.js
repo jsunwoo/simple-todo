@@ -44,15 +44,15 @@ export default class App extends React.Component {
         <View style={styles.card}>
           <TextInput
             style={styles.input}
-            placeholder={"New To Do"}
             value={newToDo}
-            onChangeText={this._controlNewToDo}
+            placeholder={"New To Do"}
             placeholderTextColor={"#999"}
+            underlineColorAndroid={"transparent"}
             //ios 키보드에서 엔터키를 done 키로 바꿈
             //returnKeyType={"done"}
             //ios 키보드에서 자동수정을 끔
             //autoCorrect={false}
-            //제출할때 실행되는 함수
+            onChangeText={this._controlNewToDo}
             onSubmitEditing={this._addToDo}
           />
           <ScrollView

@@ -54,9 +54,10 @@ export default class ToDo extends Component {
               ]}
               value={toDoValue}
               multiline={true}
+              underlineColorAndroid={"transparent"}
               onChangeText={this._controllInput}
-              returnKeyType={"done"} // ios 전용 기능같음
-              onBlur={this._finishEditing} // 화면밖 터치하면 실행
+              // 화면밖 터치하면 실행
+              onBlur={this._finishEditing}
             />
           ) : (
             <Text
